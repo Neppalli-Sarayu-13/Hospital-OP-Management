@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Update Visits | Hospital OP Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='update_visit_list.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="background-shapes" aria-hidden="true">
+        <span class="shape shape-one"></span>
+        <span class="shape shape-two"></span>
+        <span class="shape shape-three"></span>
+    </div>
+
+    <header class="top-header">
+        <a href="{{ url_for('dashboard') }}" class="brand">
+            <span class="brand-icon">✚</span>
+            <span>Hospital <strong>OP Management</strong></span>
+        </a>
+
+        <a href="{{ url_for('dashboard') }}" class="header-link">
+            ← Dashboard
+        </a>
+    </header>
+
+    <main class="page-wrapper">
+
+        <section class="page-heading">
+            <div class="heading-icon">✎</div>
+
+            <div>
+                <p class="eyebrow">PATIENT MANAGEMENT</p>
+                <h1>Update Visits</h1>
+                <p class="subtitle">
+                    Review patient visit records and update details when needed.
+                </p>
+            </div>
+        </section>
+
+        <section class="table-card">
+
+            <div class="table-card-header">
+                <div>
+                    <h2>Patient Visit Records</h2>
+                    <p>View and edit existing outpatient visits.</p>
+                </div>
+
+                <div class="record-badge">
+                    <span class="record-dot"></span>
+                    {% if visits %}
+                        {{ visits|length }} Record{% if visits|length != 1 %}s{% endif %}
+                    {% else %}
+                        0 Records
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="accent-line"></div>
+
+            {% if visits %}
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="number-column">#</th>
+                            <th>Patient Name</th>
+                            <th>Visit Date</th>
+                            <th>Purpose of Visit</th>
+                            <th class="action-column">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for v in visits %}
+                        <tr class="visit-row">
+                            <td class="row-number">
+                                {{ loop.index }}
+                            </td>
+
+                            <td>
+                                <div class="patient-cell">
+                                    <span class="patient-avatar">
+                                        {{ (v.customer_name or '?')[0]|upper }}
+                                    </span>
+
+                                    <span class="patient-name">
+                                        {{ v.customer_name }}
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="date-chip">
+                                    <span class="date-icon">▦</span>
+                                    {{ v.visit_date }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="purpose-text">
+                                    {{ v.purpose }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <a href="{{ url_for('edit_visit', index=loop.index0) }}"
+                                   class="edit-button"
+                                   aria-label="Edit visit for {{ v.customer_name }}">
+                                    <span class="edit-icon">✎</span>
+                                    Edit
+                                    <span class="edit-arrow">→</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+                <div class="empty-icon">▤</div>
+                <h3>No Visits Found</h3>
+                <p>
+                    There are currently no patient visits to display.
+                    Add a visit to get started.
+                </p>
+                <a href="{{ url_for('dashboard') }}" class="empty-button">
+                    Return to Dashboard →
+                </a>
+            </div>
+
+            {% endif %}
+
+            <div class="table-footer">
+                <span class="footer-dot"></span>
+                <span>Hospital OP Management System</span>
+                <span class="footer-message">
+                    Every visit matters.
+                </span>
+            </div>
+
+        </section>
+
+        <p class="page-caption">
+            Better records. Smoother visits. Better patient care.
+        </p>
+
+    </main>
+
+    <script>
+        // Animate visit rows one after another
+        document.querySelectorAll(".visit-row").forEach((row, index) => {
+            row.style.animationDelay = `${0.08 + index * 0.07}s`;
+        });
+    </script>
+
+</body>
+</html>

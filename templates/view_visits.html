@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Visit Records | Hospital OP Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='view_visits.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-hospital"></i>
+            </div>
+
+            <div>
+                <h1>Hospital OP Management</h1>
+                <p>Outpatient Department Management System</p>
+            </div>
+        </div>
+
+        <div class="header-label">
+            <i class="fa-solid fa-shield-heart"></i>
+            Patient Visit Records
+        </div>
+    </header>
+
+    <main class="page-container">
+
+        <section class="welcome-section">
+            <div class="welcome-icon">
+                <i class="fa-solid fa-clipboard-list"></i>
+            </div>
+
+            <div>
+                <h2>Visit Records</h2>
+                <p>View and manage outpatient visit information.</p>
+            </div>
+        </section>
+
+        <section class="summary-card">
+            <div class="summary-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div>
+                <p>Total Recorded Visits</p>
+                <h3>{{ visits|length }}</h3>
+            </div>
+
+            <div class="summary-badge">
+                <i class="fa-solid fa-chart-line"></i>
+                Visit Overview
+            </div>
+        </section>
+
+        <section class="records-card">
+
+            <div class="records-heading">
+                <div>
+                    <h3>
+                        <i class="fa-solid fa-file-medical"></i>
+                        Patient Visit Details
+                    </h3>
+                    <p>Outpatient visit history and notes</p>
+                </div>
+
+                <span class="record-count">
+                    {{ visits|length }} Records
+                </span>
+            </div>
+
+            {% if visits %}
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl. No.</th>
+                            <th>Patient Name</th>
+                            <th>Visit Date</th>
+                            <th>Purpose</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for v in visits %}
+                        <tr style="--row-index: {{ loop.index0 }}">
+
+                            <td>
+                                <span class="serial-number">
+                                    {{ loop.index }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="patient-info">
+                                    <div class="patient-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+
+                                    <span class="patient-name">
+                                        {{ v.customer_name }}
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="date-badge">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    {{ v.visit_date }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="purpose-text">
+                                    {{ v.purpose or 'Not specified' }}
+                                </span>
+                            </td>
+
+                            <td class="notes-cell">
+                                {{ v.notes or 'No notes available' }}
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+
+                <h3>No Visit Records Found</h3>
+
+                <p>
+                    Patient visit records will appear here once
+                    visits have been registered.
+                </p>
+            </div>
+
+            {% endif %}
+
+            <div class="footer-actions">
+                <a href="{{ url_for('dashboard') }}" class="back-button">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+
+                <span class="footer-note">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    Hospital OP Management System
+                </span>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(function (row, index) {
+                row.style.animationDelay = `${index * 0.08}s`;
+            });
+        });
+    </script>
+
+</body>
+</html>

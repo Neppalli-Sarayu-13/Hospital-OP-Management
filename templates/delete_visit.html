@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Visits | Hospital OP Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='delete_visit.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="brand">
+        <div class="brand-icon">
+            <i class="fa-solid fa-hospital"></i>
+        </div>
+
+        <div>
+            <h1>Hospital OP Management</h1>
+            <p>Outpatient Department Management System</p>
+        </div>
+    </div>
+
+    <div class="header-badge">
+        <i class="fa-solid fa-shield-heart"></i>
+        Visit Management
+    </div>
+</header>
+
+<main class="page-container">
+
+    <section class="page-heading">
+        <div class="heading-icon">
+            <i class="fa-solid fa-trash-can"></i>
+        </div>
+
+        <div>
+            <h2>Delete Visit Records</h2>
+            <p>Review patient visits before removing a record.</p>
+        </div>
+    </section>
+
+    <section class="warning-card">
+        <div class="warning-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+
+        <div>
+            <h3>Important Notice</h3>
+            <p>
+                Deleting a visit may permanently remove its record.
+                Verify the patient details before proceeding.
+            </p>
+        </div>
+    </section>
+
+    <section class="records-card">
+
+        <div class="records-heading">
+            <div>
+                <h3>
+                    <i class="fa-solid fa-clipboard-list"></i>
+                    Patient Visit Records
+                </h3>
+                <p>Review the details and select an action.</p>
+            </div>
+
+            <span class="record-count">
+                {{ visits|length }} Records
+            </span>
+        </div>
+
+        {% if visits %}
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sl. No.</th>
+                        <th>Patient Name</th>
+                        <th>Visit Date</th>
+                        <th>Purpose</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for v in visits %}
+                    <tr style="--row-index: {{ loop.index0 }}">
+
+                        <td>
+                            <span class="serial-number">
+                                {{ loop.index }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="patient-info">
+                                <div class="patient-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <span class="patient-name">
+                                    {{ v.customer_name }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="date-badge">
+                                <i class="fa-regular fa-calendar"></i>
+                                {{ v.visit_date }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="purpose-text">
+                                {{ v.purpose or 'Not specified' }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <a href="{{ url_for('delete_visit', index=loop.index0) }}"
+                               class="delete-button"
+                               aria-label="Delete visit for {{ v.customer_name }}"
+                               onclick="return confirmDelete(this, '{{ v.customer_name|e }}')">
+
+                                <i class="fa-solid fa-trash-can"></i>
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+
+            <h3>No Visit Records Found</h3>
+
+            <p>
+                There are currently no patient visits available
+                to delete.
+            </p>
+        </div>
+
+        {% endif %}
+
+        <div class="footer-actions">
+            <a href="{{ url_for('dashboard') }}" class="back-button">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Dashboard
+            </a>
+
+            <span class="footer-note">
+                <i class="fa-solid fa-heart-pulse"></i>
+                Hospital OP Management System
+            </span>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    function confirmDelete(button, patientName) {
+        const confirmed = window.confirm(
+            "Delete the visit record for " + patientName +
+            "?\n\nThis action may permanently remove the record."
+        );
+
+        if (confirmed) {
+            button.classList.add("deleting");
+            button.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Deleting...';
+        }
+
+        return confirmed;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("tbody tr").forEach(function (row, index) {
+            row.style.animationDelay = (index * 0.08) + "s";
+        });
+    });
+</script>
+
+</body>
+</html>

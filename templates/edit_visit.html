@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Visit | Hospital OP Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='edit_visit.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="background-shapes">
+        <span class="shape shape-one"></span>
+        <span class="shape shape-two"></span>
+        <span class="shape shape-three"></span>
+    </div>
+
+    <header class="top-header">
+        <a href="{{ url_for('update_visit_list') }}" class="brand">
+            <span class="brand-icon">✚</span>
+            <span>Hospital <strong>OP Management</strong></span>
+        </a>
+
+        <span class="header-label">Patient Care Portal</span>
+    </header>
+
+    <main class="page-wrapper">
+
+        <section class="form-card">
+
+            <div class="card-heading">
+                <div class="heading-icon">✎</div>
+
+                <div>
+                    <p class="eyebrow">PATIENT MANAGEMENT</p>
+                    <h1>Edit Visit Details</h1>
+                    <p class="subtitle">
+                        Review and update the patient's visit information.
+                    </p>
+                </div>
+            </div>
+
+            <div class="progress-line">
+                <span></span>
+            </div>
+
+            {% if error %}
+                <div class="error-message" role="alert">
+                    <span class="error-icon">!</span>
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+
+            <form method="POST" class="visit-form">
+
+                <div class="form-group">
+                    <label for="customer_name">
+                        Patient Name <span>*</span>
+                    </label>
+
+                    <div class="input-wrapper">
+                        <span class="field-icon">👤</span>
+
+                        <input
+                            type="text"
+                            id="customer_name"
+                            name="customer_name"
+                            value="{{ visit.customer_name }}"
+                            placeholder="Enter patient's full name"
+                            autocomplete="name"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="visit_date">
+                        Visit Date <span>*</span>
+                    </label>
+
+                    <div class="input-wrapper">
+                        <span class="field-icon">📅</span>
+
+                        <input
+                            type="date"
+                            id="visit_date"
+                            name="visit_date"
+                            value="{{ visit.visit_date }}"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="purpose">
+                        Purpose of Visit <span>*</span>
+                    </label>
+
+                    <div class="input-wrapper">
+                        <span class="field-icon">🩺</span>
+
+                        <input
+                            type="text"
+                            id="purpose"
+                            name="purpose"
+                            value="{{ visit.purpose }}"
+                            placeholder="Enter the purpose of the visit"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+
+                    <div class="input-wrapper textarea-wrapper">
+                        <span class="field-icon">📝</span>
+
+                        <textarea
+                            id="notes"
+                            name="notes"
+                            placeholder="Update any additional visit details..."
+                            rows="4">{{ visit.notes or '' }}</textarea>
+                    </div>
+
+                    <p class="helper-text">
+                        Optional: Update any relevant visit information.
+                    </p>
+                </div>
+
+                <button type="submit" class="update-button">
+                    <span>Save Changes</span>
+                    <span class="button-arrow">✓</span>
+                </button>
+
+                <a href="{{ url_for('update_visit_list') }}"
+                   class="back-link">
+                    <span>←</span> Back to Update List
+                </a>
+
+            </form>
+
+            <div class="card-footer">
+                <span class="footer-dot"></span>
+                Hospital OP Management System
+            </div>
+
+        </section>
+
+        <p class="page-caption">
+            Every update helps us deliver better patient care.
+        </p>
+
+    </main>
+
+    <script>
+        // Animate each field in sequence
+        document.querySelectorAll(".form-group").forEach((group, index) => {
+            group.style.animationDelay = `${0.2 + index * 0.12}s`;
+        });
+
+        // Show visual feedback when updating
+        document.querySelector(".visit-form").addEventListener(
+            "submit",
+            function () {
+                if (!this.checkValidity()) {
+                    return;
+                }
+
+                const button = this.querySelector(".update-button");
+
+                button.classList.add("loading");
+                button.querySelector("span:first-child").textContent =
+                    "Updating Visit...";
+                button.querySelector(".button-arrow").textContent = "↻";
+            }
+        );
+    </script>
+
+</body>
+</html>

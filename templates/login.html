@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Hospital OP Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='login.css') }}">
+</head>
+
+<body>
+
+    <!-- Animated background decorations -->
+    <div class="background-decoration" aria-hidden="true">
+        <span class="floating-circle circle-one"></span>
+        <span class="floating-circle circle-two"></span>
+        <span class="floating-circle circle-three"></span>
+    </div>
+
+    <!-- Main page wrapper -->
+    <main class="page-wrapper">
+
+        <!-- Hospital heading -->
+        <header class="page-header">
+            <div class="hospital-icon" aria-hidden="true">✚</div>
+            <h1>Hospital OP Management</h1>
+            <p class="header-subtitle">
+                Better Care. Better Management.
+            </p>
+        </header>
+
+        <!-- Login card -->
+        <section class="container">
+
+            <div class="form-icon" aria-hidden="true">♙</div>
+
+            <div class="form-header">
+                <p class="welcome-label">WELCOME BACK</p>
+                <h2>Login to Your Account</h2>
+                <p class="description">
+                    Please enter your credentials to continue.
+                </p>
+            </div>
+
+            <!-- Flask error message -->
+            {% if error %}
+                <div class="error" role="alert">
+                    <span aria-hidden="true">⚠</span>
+                    <span>{{ error }}</span>
+                </div>
+            {% endif %}
+
+            <form method="POST" id="loginForm">
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="togglePassword"
+                            aria-label="Show password"
+                            aria-pressed="false"
+                        >
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit"
+                        class="login-button"
+                        id="loginButton">
+                    <span class="button-text">Login to Dashboard</span>
+                    <span class="button-arrow" aria-hidden="true">→</span>
+                </button>
+
+            </form>
+
+            <!-- Register link -->
+            <div class="register-section">
+                <p>Don't have an account?</p>
+                <a href="{{ url_for('register') }}">
+                    Create New Account
+                </a>
+            </div>
+
+            <!-- Security note -->
+            <div class="security-note">
+                <span aria-hidden="true">🔒</span>
+                <span>Keep your login credentials private.</span>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>
+                &copy; 2026 Hospital OP Management System.
+                All rights reserved.
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- Password visibility and button feedback -->
+    <script>
+        const passwordInput = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+        const loginForm = document.getElementById("loginForm");
+        const loginButton = document.getElementById("loginButton");
+
+        // Show or hide password
+        togglePassword.addEventListener("click", function () {
+            const isPassword = passwordInput.type === "password";
+
+            passwordInput.type = isPassword ? "text" : "password";
+            togglePassword.textContent = isPassword ? "Hide" : "Show";
+
+            togglePassword.setAttribute(
+                "aria-label",
+                isPassword ? "Hide password" : "Show password"
+            );
+
+            togglePassword.setAttribute(
+                "aria-pressed",
+                String(isPassword)
+            );
+        });
+
+        // Show feedback when the form is submitted
+        loginForm.addEventListener("submit", function () {
+            if (!loginForm.checkValidity()) {
+                return;
+            }
+
+            loginButton.classList.add("loading");
+            loginButton.disabled = true;
+
+            loginButton.querySelector(".button-text").textContent =
+                "Signing in...";
+
+        });
+    </script>
+
+</body>
+</html>

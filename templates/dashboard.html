@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Hospital OP Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+
+<body>
+
+    <!-- Animated background decorations -->
+    <div class="background-decoration" aria-hidden="true">
+        <span class="floating-circle circle-one"></span>
+        <span class="floating-circle circle-two"></span>
+        <span class="floating-circle circle-three"></span>
+    </div>
+
+    <!-- Top navigation -->
+    <header class="top-header">
+        <a class="brand" href="{{ url_for('dashboard') }}">
+            <span class="brand-icon" aria-hidden="true">✚</span>
+            <span>Hospital <strong>OP Management</strong></span>
+        </a>
+
+        <div class="header-status">
+            <span class="status-dot"></span>
+            Visit Record System
+        </div>
+    </header>
+
+    <main class="dashboard">
+
+        <!-- Welcome section -->
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <span class="welcome-badge">
+                    <span>✦</span> YOUR DASHBOARD
+                </span>
+
+                <h1>
+                    Welcome back,<br>
+                    <span>{{ user }}</span>!
+                </h1>
+
+                <p>
+                    Manage hospital visits efficiently.
+                    Access your visit records and keep everything organized
+                    in one place.
+                </p>
+            </div>
+
+            <div class="welcome-illustration" aria-hidden="true">
+                <div class="illustration-circle">
+                    <div class="medical-cross">✚</div>
+                    <span class="orbit orbit-one"></span>
+                    <span class="orbit orbit-two"></span>
+                    <span class="orbit-dot"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard heading -->
+        <section class="actions-section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-eyebrow">QUICK ACCESS</p>
+                    <h2>Manage Hospital Visits</h2>
+                    <p class="section-description">
+                        Choose an action to continue.
+                    </p>
+                </div>
+
+                <span class="section-icon" aria-hidden="true">▦</span>
+            </div>
+
+            <!-- Action cards -->
+            <div class="action-grid">
+
+                <a class="action-card add-card"
+                   href="{{ url_for('add_visit') }}">
+                    <div class="action-icon">＋</div>
+                    <div class="action-text">
+                        <h3>Add Visit</h3>
+                        <p>Register a new hospital visit.</p>
+                    </div>
+                    <span class="card-arrow">↗</span>
+                </a>
+
+                <a class="action-card view-card"
+                   href="{{ url_for('view_visits') }}">
+                    <div class="action-icon">▤</div>
+                    <div class="action-text">
+                        <h3>View Visits</h3>
+                        <p>Browse existing visit records.</p>
+                    </div>
+                    <span class="card-arrow">↗</span>
+                </a>
+
+                <a class="action-card update-card"
+                   href="{{ url_for('update_visit_list') }}">
+                    <div class="action-icon">✎</div>
+                    <div class="action-text">
+                        <h3>Update Visit</h3>
+                        <p>Edit visit details when needed.</p>
+                    </div>
+                    <span class="card-arrow">↗</span>
+                </a>
+
+                <a class="action-card delete-card"
+                   href="{{ url_for('delete_visit_list') }}">
+                    <div class="action-icon">⌫</div>
+                    <div class="action-text">
+                        <h3>Delete Visit</h3>
+                        <p>Remove an unwanted visit record.</p>
+                    </div>
+                    <span class="card-arrow">↗</span>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Information banner -->
+        <section class="info-banner">
+            <div class="info-icon" aria-hidden="true">♥</div>
+            <div>
+                <h3>Organized records, better care</h3>
+                <p>
+                    Keep hospital visit information accurate and up to date.
+                </p>
+            </div>
+        </section>
+
+        <!-- Logout -->
+        <div class="logout-section">
+            <a href="{{ url_for('logout') }}" class="logout-button">
+                <span aria-hidden="true">↪</span>
+                Logout
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            &copy; 2026 Hospital OP Management System.
+            All rights reserved.
+        </p>
+        <p class="footer-note">Healthcare record management</p>
+    </footer>
+
+    <!-- Subtle entrance animation for the dashboard -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".action-card");
+
+            cards.forEach(function (card, index) {
+                card.style.setProperty("--card-index", index);
+            });
+        });
+    </script>
+
+</body>
+</html>

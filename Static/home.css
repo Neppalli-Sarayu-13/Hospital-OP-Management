@@ -1,0 +1,1099 @@
+/* ==========================================
+   HOSPITAL OP MANAGEMENT
+   ANIMATED HOME PAGE
+========================================== */
+
+:root {
+    --navy: #082d49;
+    --blue: #087fbd;
+    --blue-light: #3d9bff;
+    --teal: #14c8b0;
+    --white: #ffffff;
+    --text-muted: #d8e9f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Poppins", "Segoe UI", sans-serif;
+    color: var(--white);
+    background-color: #082d49;
+
+    background-image:
+        url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+/* Background overlay */
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 80% 40%,
+            rgba(8, 127, 189, 0.24),
+            transparent 38%
+        ),
+        linear-gradient(
+            115deg,
+            rgba(3, 24, 45, 0.94) 0%,
+            rgba(5, 52, 78, 0.88) 50%,
+            rgba(5, 87, 111, 0.78) 100%
+        );
+}
+
+/* Floating decorations */
+
+.floating-elements {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.medical-symbol {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.10);
+    font-weight: 300;
+    animation: floatSymbol 10s ease-in-out infinite;
+}
+
+.symbol-one {
+    top: 22%;
+    left: 6%;
+    font-size: 70px;
+}
+
+.symbol-two {
+    top: 72%;
+    left: 43%;
+    font-size: 48px;
+    animation-delay: -3s;
+}
+
+.symbol-three {
+    top: 18%;
+    right: 8%;
+    font-size: 56px;
+    animation-delay: -5s;
+}
+
+.symbol-four {
+    bottom: 12%;
+    right: 38%;
+    font-size: 40px;
+    animation-delay: -2s;
+}
+
+.circle {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    animation: floatCircle 12s ease-in-out infinite;
+}
+
+.circle-one {
+    width: 300px;
+    height: 300px;
+    top: 15%;
+    right: 8%;
+}
+
+.circle-two {
+    width: 190px;
+    height: 190px;
+    bottom: 8%;
+    left: 12%;
+    animation-delay: -5s;
+}
+
+@keyframes floatSymbol {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-25px) rotate(12deg);
+    }
+}
+
+@keyframes floatCircle {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(18px, -25px);
+    }
+}
+
+/* Header */
+
+.navbar {
+    position: relative;
+    z-index: 2;
+    min-height: 88px;
+    padding: 18px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    background: rgba(4, 30, 51, 0.30);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    animation: slideDown 0.8s ease both;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.brand-icon {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--teal), var(--blue-light));
+    box-shadow: 0 7px 24px rgba(20, 200, 176, 0.25);
+
+    font-size: 28px;
+    transition: transform 0.4s ease;
+}
+
+.brand:hover .brand-icon {
+    transform: rotate(90deg) scale(1.08);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.brand-text strong {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.brand-text small {
+    color: #8fdedc;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.nav-login {
+    padding: 11px 22px;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 9px;
+}
+
+.nav-login:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: white;
+}
+
+.nav-register {
+    padding: 12px 20px;
+    color: #06304c;
+    background: white;
+    border-radius: 9px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.13);
+}
+
+.nav-register span {
+    display: inline-block;
+    margin-left: 7px;
+    transition: transform 0.3s ease;
+}
+
+.nav-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 9px 25px rgba(0, 0, 0, 0.22);
+}
+
+.nav-register:hover span {
+    transform: translateX(4px);
+}
+
+/* Hero layout */
+
+.hero {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 1500px;
+    flex: 1;
+
+    margin: 0 auto;
+    padding: 65px 7% 75px;
+
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+    align-items: center;
+    gap: 65px;
+}
+
+/* Hero content */
+
+.hero-content {
+    max-width: 640px;
+}
+
+.hero-content > * {
+    animation: revealUp 0.8s ease both;
+}
+
+.welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 15px;
+    margin-bottom: 27px;
+
+    border: 1px solid rgba(143, 222, 220, 0.26);
+    border-radius: 30px;
+    background: rgba(20, 200, 176, 0.09);
+
+    color: #9ce9df;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 5px rgba(20, 200, 176, 0.12);
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 4px rgba(20, 200, 176, 0.10);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(20, 200, 176, 0.03);
+    }
+}
+
+.hero-content h1 {
+    margin-bottom: 24px;
+    font-size: clamp(36px, 4.4vw, 63px);
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1.2;
+}
+
+.hero-content h1 span {
+    display: inline-block;
+    color: #65dfd4;
+    background: linear-gradient(90deg, #65dfd4, #67baff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    max-width: 540px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 2;
+}
+
+/* Main buttons */
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 32px;
+}
+
+.primary-button,
+.secondary-button {
+    min-height: 52px;
+    padding: 14px 21px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.primary-button {
+    color: #05314d;
+    background: linear-gradient(110deg, #7af0df, #7bcaff);
+    box-shadow: 0 8px 28px rgba(55, 188, 207, 0.19);
+}
+
+.primary-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 13px 32px rgba(55, 188, 207, 0.32);
+}
+
+.button-arrow {
+    font-size: 19px;
+    transition: transform 0.3s ease;
+}
+
+.primary-button:hover .button-arrow {
+    transform: translateX(5px);
+}
+
+.secondary-button {
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.secondary-button:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.65);
+}
+
+/* Feature list */
+
+.hero-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px 20px;
+    margin-top: 37px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #d6e9f3;
+    font-size: 10px;
+}
+
+.feature-icon {
+    width: 19px;
+    height: 19px;
+
+    display: grid;
+    place-items: center;
+
+    color: #70e6d7;
+    background: rgba(20, 200, 176, 0.13);
+    border: 1px solid rgba(20, 200, 176, 0.22);
+    border-radius: 50%;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Medical visual */
+
+.visual-section {
+    position: relative;
+    min-width: 0;
+    min-height: 440px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: visualAppear 1s ease both;
+    animation-delay: 0.4s;
+}
+
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+.glow-one {
+    width: 320px;
+    height: 320px;
+    background: rgba(20, 200, 176, 0.10);
+    animation: glowPulse 5s ease-in-out infinite;
+}
+
+.glow-two {
+    width: 230px;
+    height: 230px;
+    background: rgba(61, 155, 255, 0.12);
+    animation: glowPulse 5s ease-in-out infinite reverse;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Medical dashboard card */
+
+.medical-card {
+    position: relative;
+    width: 100%;
+    max-width: 390px;
+    padding: 25px;
+
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 24px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.16),
+        rgba(255, 255, 255, 0.055)
+    );
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.23),
+        inset 0 1px 0 rgba(255, 255, 255, 0.17);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    transition: transform 0.2s ease-out;
+    transform-style: preserve-3d;
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.hospital-icon {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+    background: linear-gradient(135deg, #15c9bb, #0786c7);
+    box-shadow: 0 7px 20px rgba(20, 200, 176, 0.20);
+
+    color: white;
+    font-size: 27px;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-title strong {
+    color: white;
+    font-size: 15px;
+}
+
+.card-title span {
+    color: #b9d5e5;
+    font-size: 10px;
+}
+
+.live-indicator {
+    width: 9px;
+    height: 9px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: #60e8b3;
+    box-shadow: 0 0 12px rgba(96, 232, 179, 0.5);
+}
+
+/* Heartbeat panel */
+
+.heartbeat-panel {
+    margin-top: 24px;
+    padding: 19px 15px;
+    border-radius: 16px;
+    background: rgba(1, 27, 48, 0.28);
+}
+
+.heartbeat-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #b4d9e9;
+    font-size: 9px;
+    letter-spacing: 1.4px;
+    font-weight: 600;
+}
+
+.heart-icon {
+    color: #69e1d5;
+    font-size: 24px;
+    animation: heartBeat 1.8s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.2);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.13);
+    }
+}
+
+.heartbeat-svg {
+    display: block;
+    width: 100%;
+    margin: 13px 0;
+    overflow: visible;
+}
+
+.heartbeat-line {
+    fill: none;
+    stroke: url(#pulseGradient);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+
+    animation: drawHeartbeat 2.8s ease-in-out infinite;
+}
+
+@keyframes drawHeartbeat {
+    0% {
+        stroke-dashoffset: 440;
+        opacity: 0.4;
+    }
+
+    65%, 100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+.heartbeat-caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: #b9d5e5;
+    font-size: 9px;
+}
+
+/* Care message */
+
+.care-message {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 20px;
+    padding: 16px;
+
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.care-symbol {
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+    color: #70e6d7;
+    background: rgba(20, 200, 176, 0.13);
+
+    font-size: 23px;
+    animation: heartBeat 2.5s ease-in-out infinite;
+}
+
+.care-message strong {
+    color: white;
+    font-size: 12px;
+}
+
+.care-message p {
+    margin-top: 4px;
+    color: #b9d5e5;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.decorative-cross {
+    position: absolute;
+    color: rgba(122, 240, 223, 0.35);
+    font-size: 27px;
+    animation: floatSymbol 6s ease-in-out infinite;
+}
+
+.cross-one {
+    top: -15px;
+    right: 28px;
+}
+
+.cross-two {
+    bottom: 60px;
+    left: -18px;
+    animation-delay: -2s;
+}
+
+/* Floating badges */
+
+.floating-badge {
+    position: absolute;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 14px;
+
+    background: rgba(8, 40, 63, 0.77);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    animation: badgeFloat 5s ease-in-out infinite;
+}
+
+.badge-top {
+    top: 37px;
+    left: -30px;
+}
+
+.badge-bottom {
+    bottom: 35px;
+    right: -25px;
+    animation-delay: -2.5s;
+}
+
+@keyframes badgeFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+.mini-icon,
+.mini-check {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    border-radius: 10px;
+    color: #77e9dd;
+    background: rgba(20, 200, 176, 0.13);
+    font-size: 19px;
+}
+
+.mini-check {
+    color: #a4f3ca;
+    background: rgba(66, 209, 139, 0.13);
+}
+
+.floating-badge div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.floating-badge strong {
+    color: white;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.floating-badge small {
+    color: #b9d5e5;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+/* Footer */
+
+.footer {
+    position: relative;
+    z-index: 1;
+
+    min-height: 66px;
+    padding: 18px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(4, 30, 51, 0.26);
+
+    color: #b8d2e1;
+    font-size: 10px;
+}
+
+.footer-heart {
+    color: #69e1d5;
+    padding-left: 4px;
+}
+
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes visualAppear {
+    from {
+        opacity: 0;
+        transform: translateX(30px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+
+@media (min-width: 1500px) {
+    .hero {
+        gap: 90px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .hero {
+        gap: 35px;
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(35px, 5vw, 52px);
+    }
+
+    .badge-top {
+        left: -10px;
+    }
+
+    .badge-bottom {
+        right: -10px;
+    }
+}
+
+@media (max-width: 800px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    .navbar {
+        min-height: 75px;
+        padding: 14px 5%;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 55px 7% 45px;
+    }
+
+    .hero-content {
+        max-width: 650px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(37px, 7vw, 55px);
+        letter-spacing: -1.5px;
+    }
+
+    .hero-description {
+        margin: 0 auto;
+    }
+
+    .hero-buttons,
+    .hero-features {
+        justify-content: center;
+    }
+
+    .visual-section {
+        width: 100%;
+        max-width: 500px;
+        min-height: 410px;
+        margin: 0 auto;
+    }
+
+    .medical-card {
+        max-width: 370px;
+    }
+
+    .badge-top {
+        left: 0;
+    }
+
+    .badge-bottom {
+        right: 0;
+    }
+
+    .footer {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 13px 16px;
+        gap: 10px;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .brand-icon {
+        width: 37px;
+        height: 37px;
+        font-size: 22px;
+        border-radius: 11px;
+    }
+
+    .brand-text strong {
+        font-size: 15px;
+    }
+
+    .brand-text small {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+    }
+
+    .nav-links {
+        gap: 7px;
+    }
+
+    .nav-links a {
+        font-size: 10px;
+    }
+
+    .nav-login {
+        padding: 9px 12px;
+    }
+
+    .nav-register {
+        padding: 10px 11px;
+    }
+
+    .hero {
+        padding: 42px 18px 35px;
+    }
+
+    .welcome-badge {
+        margin-bottom: 22px;
+        padding: 9px 12px;
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(32px, 8.5vw, 40px);
+        line-height: 1.25;
+    }
+
+    .hero-description {
+        font-size: 12px;
+        line-height: 1.9;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 11px;
+    }
+
+    .primary-button,
+    .secondary-button {
+        width: 100%;
+    }
+
+    .hero-features {
+        flex-direction: column;
+        align-items: flex-start;
+        width: fit-content;
+        margin: 28px auto 0;
+    }
+
+    .visual-section {
+        min-height: 360px;
+    }
+
+    .medical-card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .heartbeat-panel {
+        padding: 14px 11px;
+    }
+
+    .floating-badge {
+        padding: 9px 11px;
+        gap: 7px;
+    }
+
+    .badge-top {
+        top: 12px;
+        left: -3px;
+    }
+
+    .badge-bottom {
+        bottom: 10px;
+        right: -3px;
+    }
+
+    .floating-badge strong {
+        font-size: 9px;
+    }
+
+    .floating-badge small {
+        font-size: 8px;
+    }
+
+    .mini-icon,
+    .mini-check {
+        width: 29px;
+        height: 29px;
+    }
+
+    .footer {
+        padding: 18px 12px;
+        font-size: 9px;
+    }
+}
+
+/* Accessibility */
+
+a:focus-visible {
+    outline: 3px solid #8cf5e6;
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

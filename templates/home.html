@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hospital OP Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='home.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Animated background -->
+    <div class="background-overlay"></div>
+
+    <div class="floating-elements" aria-hidden="true">
+        <span class="medical-symbol symbol-one">✚</span>
+        <span class="medical-symbol symbol-two">＋</span>
+        <span class="medical-symbol symbol-three">✚</span>
+        <span class="medical-symbol symbol-four">＋</span>
+        <span class="circle circle-one"></span>
+        <span class="circle circle-two"></span>
+    </div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="{{ url_for('home') }}" class="brand">
+            <span class="brand-icon">✚</span>
+
+            <span class="brand-text">
+                <strong>Hospital</strong>
+                <small>OP MANAGEMENT</small>
+            </span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="{{ url_for('login') }}" class="nav-login">
+                Login
+            </a>
+
+            <a href="{{ url_for('register') }}" class="nav-register">
+                Get Started <span>→</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main hero section -->
+    <main class="hero">
+
+        <section class="hero-content">
+
+            <div class="welcome-badge">
+                <span class="status-dot"></span>
+                YOUR HEALTH, OUR PRIORITY
+            </div>
+
+            <h1>
+                Smarter Healthcare.<br>
+                <span>Better Patient Care.</span>
+            </h1>
+
+            <p class="hero-description">
+                Welcome to the Hospital OP Management System.
+                Manage outpatient visits, maintain patient records,
+                and simplify hospital visit management through one
+                convenient digital platform.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{{ url_for('login') }}" class="primary-button">
+                    <span>Access Your Account</span>
+                    <span class="button-arrow">→</span>
+                </a>
+
+                <a href="{{ url_for('register') }}" class="secondary-button">
+                    Create an Account
+                </a>
+            </div>
+
+            <div class="hero-features">
+                <div class="feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Organized Visit Records</span>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Easy Visit Management</span>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon">✓</span>
+                    <span>Simple Digital Access</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Decorative medical information card -->
+        <section class="visual-section" aria-label="Healthcare illustration">
+
+            <div class="glow glow-one"></div>
+            <div class="glow glow-two"></div>
+
+            <div class="medical-card">
+
+                <div class="card-top">
+                    <div class="hospital-icon">✚</div>
+
+                    <div class="card-title">
+                        <strong>Patient Care</strong>
+                        <span>Digital Healthcare Platform</span>
+                    </div>
+
+                    <span class="live-indicator"></span>
+                </div>
+
+                <div class="heartbeat-panel">
+                    <div class="heartbeat-label">
+                        <span>CARE THAT MATTERS</span>
+                        <span class="heart-icon">♡</span>
+                    </div>
+
+                    <svg class="heartbeat-svg"
+                         viewBox="0 0 340 100"
+                         role="img"
+                         aria-label="Decorative heartbeat line">
+
+                        <defs>
+                            <linearGradient id="pulseGradient"
+                                            x1="0%" y1="0%"
+                                            x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#14c8b0"/>
+                                <stop offset="100%" stop-color="#3d9bff"/>
+                            </linearGradient>
+                        </defs>
+
+                        <path class="heartbeat-line"
+                              d="M0,52 L65,52 L83,50 L100,52
+                                 L118,52 L134,24 L151,78
+                                 L169,8 L189,65 L204,52
+                                 L240,52 L254,48 L266,52 L340,52"/>
+                    </svg>
+
+                    <div class="heartbeat-caption">
+                        <span>Compassion</span>
+                        <span>Care</span>
+                        <span>Confidence</span>
+                    </div>
+                </div>
+
+                <div class="care-message">
+                    <div class="care-symbol">♥</div>
+
+                    <div>
+                        <strong>Every Visit Matters</strong>
+                        <p>Supporting a smoother patient experience.</p>
+                    </div>
+                </div>
+
+                <div class="decorative-cross cross-one">+</div>
+                <div class="decorative-cross cross-two">+</div>
+
+            </div>
+
+            <div class="floating-badge badge-top">
+                <span class="mini-icon">✚</span>
+                <div>
+                    <strong>Patient First</strong>
+                    <small>Care with compassion</small>
+                </div>
+            </div>
+
+            <div class="floating-badge badge-bottom">
+                <span class="mini-check">✓</span>
+                <div>
+                    <strong>Simple & Organized</strong>
+                    <small>Manage visits with ease</small>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© <span id="current-year"></span> Hospital OP Management System</p>
+        <p>Designed for better patient care <span class="footer-heart">♥</span></p>
+    </footer>
+
+    <script>
+        // Automatically update the footer year
+        document.getElementById("current-year").textContent =
+            new Date().getFullYear();
+
+        // Reveal hero content smoothly
+        document.querySelectorAll(
+            ".hero-content > *, .visual-section"
+        ).forEach((element, index) => {
+            element.style.animationDelay = `${0.15 + index * 0.13}s`;
+        });
+
+        // Subtle mouse movement effect on the medical card
+        const visualSection = document.querySelector(".visual-section");
+        const medicalCard = document.querySelector(".medical-card");
+
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            visualSection.addEventListener("mousemove", (event) => {
+                const rect = visualSection.getBoundingClientRect();
+
+                const x = (event.clientX - rect.left) / rect.width - 0.5;
+                const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+                medicalCard.style.transform =
+                    `perspective(1000px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`;
+            });
+
+            visualSection.addEventListener("mouseleave", () => {
+                medicalCard.style.transform =
+                    "perspective(1000px) rotateY(0deg) rotateX(0deg)";
+            });
+        }
+    </script>
+
+</body>
+</html>

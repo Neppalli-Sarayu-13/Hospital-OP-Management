@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Hospital OP Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+</head>
+<body>
+
+    <main class="page-wrapper">
+
+        <header class="page-header">
+            <div class="hospital-icon" aria-hidden="true">✚</div>
+            <h1>Hospital OP Management</h1>
+            <p>Create your account to get started</p>
+        </header>
+
+        <section class="container">
+            <div class="form-heading">
+                <h2>Create Account</h2>
+                <p>Enter your details to register</p>
+            </div>
+
+            {% if error %}
+                <p class="error" role="alert">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST" autocomplete="on">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required
+                    >
+                    <p id="password-message" class="password-message" aria-live="polite"></p>
+                </div>
+
+                <button type="submit" id="register-button">
+                    Create Account <span aria-hidden="true">→</span>
+                </button>
+            </form>
+
+            <div class="login-section">
+                <span>Already have an account?</span>
+                <a href="{{ url_for('login') }}">Sign in</a>
+            </div>
+
+            <div class="security-note">
+                <span aria-hidden="true">🔒</span>
+                Your account information is handled securely.
+            </div>
+        </section>
+
+        <footer class="page-footer">
+            &copy; 2026 Hospital OP Management System
+        </footer>
+
+    </main>
+
+    <script>
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirm_password");
+        const message = document.getElementById("password-message");
+        const form = document.querySelector("form");
+
+        function checkPasswords() {
+            if (!confirmPassword.value) {
+                message.textContent = "";
+                message.className = "password-message";
+                confirmPassword.setCustomValidity("");
+                return;
+            }
+
+            if (password.value !== confirmPassword.value) {
+                message.textContent = "Passwords do not match.";
+                message.className = "password-message mismatch";
+                confirmPassword.setCustomValidity("Passwords do not match.");
+            } else {
+                message.textContent = "Passwords match.";
+                message.className = "password-message match";
+                confirmPassword.setCustomValidity("");
+            }
+        }
+
+        password.addEventListener("input", checkPasswords);
+        confirmPassword.addEventListener("input", checkPasswords);
+
+        form.addEventListener("submit", function (event) {
+            checkPasswords();
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                form.reportValidity();
+            }
+        });
+    </script>
+
+</body>
+</html>

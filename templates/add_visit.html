@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Visit | Hospital OP Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='add_visit.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="background-shapes">
+        <span class="shape shape-one"></span>
+        <span class="shape shape-two"></span>
+        <span class="shape shape-three"></span>
+    </div>
+
+    <header class="top-header">
+        <a href="{{ url_for('dashboard') }}" class="brand">
+            <span class="brand-icon">✚</span>
+            <span>Hospital <strong>OP Management</strong></span>
+        </a>
+
+        <span class="header-label">Patient Care Portal</span>
+    </header>
+
+    <main class="page-wrapper">
+
+        <section class="form-card">
+
+            <div class="card-heading">
+                <div class="heading-icon">＋</div>
+
+                <div>
+                    <p class="eyebrow">PATIENT MANAGEMENT</p>
+                    <h1>Add New Visit</h1>
+                    <p class="subtitle">
+                        Record patient visit details quickly and securely.
+                    </p>
+                </div>
+            </div>
+
+            <div class="progress-line">
+                <span></span>
+            </div>
+
+            <form method="POST" class="visit-form">
+
+                <div class="form-group">
+                    <label for="customer_name">Patient Name
+                        <span>*</span>
+                    </label>
+
+                    <div class="input-wrapper">
+                        <span class="field-icon">👤</span>
+                        <input
+                            type="text"
+                            id="customer_name"
+                            name="customer_name"
+                            placeholder="Enter patient's full name"
+                            autocomplete="name"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="visit_date">Visit Date
+                        <span>*</span>
+                    </label>
+
+                    <div class="input-wrapper">
+                        <span class="field-icon">📅</span>
+                        <input
+                            type="date"
+                            id="visit_date"
+                            name="visit_date"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="purpose">Purpose of Visit
+                        <span>*</span>
+                    </label>
+
+                    <div class="input-wrapper">
+                        <span class="field-icon">🩺</span>
+                        <input
+                            type="text"
+                            id="purpose"
+                            name="purpose"
+                            placeholder="e.g. General consultation"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+
+                    <div class="input-wrapper textarea-wrapper">
+                        <span class="field-icon">📝</span>
+                        <textarea
+                            id="notes"
+                            name="notes"
+                            placeholder="Enter any additional visit details..."
+                            rows="4"></textarea>
+                    </div>
+
+                    <p class="helper-text">
+                        Optional: Add relevant visit information.
+                    </p>
+                </div>
+
+                <button type="submit" class="save-button">
+                    <span>Save Visit Details</span>
+                    <span class="button-arrow">→</span>
+                </button>
+
+                <a href="{{ url_for('dashboard') }}" class="back-link">
+                    <span>←</span> Back to Dashboard
+                </a>
+
+            </form>
+
+            <div class="card-footer">
+                <span class="footer-dot"></span>
+                Hospital OP Management System
+            </div>
+
+        </section>
+
+        <p class="page-caption">
+            Caring for patients, one visit at a time.
+        </p>
+
+    </main>
+
+    <script>
+        // Staggered entrance animation for form fields
+        document.querySelectorAll(".form-group").forEach((group, index) => {
+            group.style.animationDelay = `${0.25 + index * 0.12}s`;
+        });
+
+        // Set today's date as the default visit date
+        const dateInput = document.getElementById("visit_date");
+
+        if (dateInput && !dateInput.value) {
+            const today = new Date();
+            const localDate = new Date(
+                today.getTime() - today.getTimezoneOffset() * 60000
+            ).toISOString().split("T")[0];
+
+            dateInput.value = localDate;
+        }
+
+        // Button loading feedback when the form is submitted
+        document.querySelector(".visit-form").addEventListener("submit", function () {
+            const button = this.querySelector(".save-button");
+
+            if (this.checkValidity()) {
+                button.classList.add("loading");
+                button.querySelector("span:first-child").textContent =
+                    "Saving Visit...";
+                button.querySelector(".button-arrow").textContent = "✓";
+            }
+        });
+    </script>
+
+</body>
+</html>

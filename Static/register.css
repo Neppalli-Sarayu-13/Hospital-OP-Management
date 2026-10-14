@@ -1,0 +1,386 @@
+/* ---------- Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #243447;
+    background:
+        linear-gradient(135deg, rgba(5, 35, 65, 0.78), rgba(0, 116, 155, 0.58)),
+        url("https://static.vecteezy.com/system/resources/thumbnails/038/811/336/small_2x/ai-generated-beautiful-background-for-hospital-advertising-free-photo.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* ---------- Page Layout ---------- */
+.page-wrapper {
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+}
+
+/* ---------- Header ---------- */
+.page-header {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 18px;
+    animation: fadeDown 0.7s ease both;
+}
+
+.hospital-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.page-header h1 {
+    font-size: clamp(22px, 3vw, 29px);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+.page-header p {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #edfaff;
+}
+
+/* ---------- Registration Card ---------- */
+.container {
+    width: 100%;
+    max-width: 390px;
+    padding: 25px 28px;
+    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 18px 45px rgba(0, 24, 50, 0.3);
+    animation: cardEntrance 0.75s ease both;
+}
+
+/* ---------- Form Heading ---------- */
+.form-heading {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.form-heading h2 {
+    color: #123b5d;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.form-heading p {
+    margin-top: 5px;
+    color: #718096;
+    font-size: 13px;
+}
+
+/* ---------- Input Fields ---------- */
+.input-group {
+    margin-bottom: 12px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #334b60;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.input-group input {
+    display: block;
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #d5e0e8;
+    border-radius: 7px;
+    outline: none;
+    background: #f8fbfd;
+    color: #263746;
+    font-size: 13px;
+    transition: border-color 0.25s, box-shadow 0.25s,
+                background 0.25s;
+}
+
+.input-group input::placeholder {
+    color: #9aa8b5;
+}
+
+.input-group input:focus {
+    background: #fff;
+    border-color: #0786c7;
+    box-shadow: 0 0 0 3px rgba(7, 134, 199, 0.12);
+}
+
+/* ---------- Password Feedback ---------- */
+.password-message {
+    min-height: 0;
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+.password-message:empty {
+    display: none;
+}
+
+.password-message.mismatch {
+    color: #d62828;
+}
+
+.password-message.match {
+    color: #16834a;
+}
+
+/* ---------- Error Message ---------- */
+.error {
+    padding: 9px 10px;
+    margin-bottom: 13px;
+    border: 1px solid #f3c4c4;
+    border-radius: 7px;
+    background: #fff0f0;
+    color: #c62828;
+    text-align: center;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+    animation: fadeDown 0.3s ease;
+}
+
+/* ---------- Submit Button ---------- */
+.container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 43px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #087fbd, #0756a5);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(7, 86, 165, 0.18);
+    transition: transform 0.2s, box-shadow 0.2s,
+                background 0.2s;
+}
+
+.container button span {
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.container button:hover {
+    background: linear-gradient(135deg, #066da5, #064584);
+    box-shadow: 0 7px 16px rgba(7, 86, 165, 0.25);
+    transform: translateY(-1px);
+}
+
+.container button:hover span {
+    transform: translateX(3px);
+}
+
+.container button:focus-visible,
+.container a:focus-visible {
+    outline: 3px solid #5db9f0;
+    outline-offset: 3px;
+}
+
+/* ---------- Login Link ---------- */
+.login-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: #718096;
+}
+
+.login-section a {
+    color: #087fbd;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-section a:hover {
+    color: #064584;
+    text-decoration: underline;
+}
+
+/* ---------- Security Note ---------- */
+.security-note {
+    margin-top: 17px;
+    padding-top: 12px;
+    border-top: 1px solid #e8edf2;
+    color: #8493a1;
+    text-align: center;
+    font-size: 10px;
+}
+
+/* ---------- Footer ---------- */
+.page-footer {
+    margin-top: 14px;
+    color: #edfaff;
+    text-align: center;
+    font-size: 11px;
+    animation: fadeUp 0.8s ease both;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Responsive Layout ---------- */
+@media (max-width: 480px) {
+    .page-wrapper {
+        padding: 15px;
+    }
+
+    .container {
+        max-width: 360px;
+        padding: 22px;
+    }
+
+    .page-header {
+        margin-bottom: 14px;
+    }
+
+    .page-header h1 {
+        font-size: 23px;
+    }
+}
+
+/* Keep the form accessible in short windows */
+@media (max-height: 720px) {
+    .page-wrapper {
+        justify-content: flex-start;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .page-header {
+        margin-bottom: 10px;
+    }
+
+    .hospital-icon {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 5px;
+        font-size: 22px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+    }
+
+    .page-header p {
+        font-size: 11px;
+    }
+
+    .container {
+        padding: 17px 23px;
+    }
+
+    .form-heading {
+        margin-bottom: 12px;
+    }
+
+    .form-heading h2 {
+        font-size: 20px;
+    }
+
+    .input-group {
+        margin-bottom: 9px;
+    }
+
+    .input-group input {
+        height: 37px;
+    }
+
+    .container button {
+        min-height: 39px;
+    }
+
+    .login-section {
+        margin-top: 11px;
+    }
+
+    .security-note {
+        margin-top: 11px;
+        padding-top: 9px;
+    }
+
+    .page-footer {
+        margin-top: 9px;
+    }
+}
+
+/* Respect accessibility preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
